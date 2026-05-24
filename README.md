@@ -1,63 +1,56 @@
-# PGOS Premium UI
+# PGOS Premium UI (React + Vite)
 
-GitHub-ready Vite + React project prepared from the uploaded PGOS JSX file.
+A working PG management SaaS frontend MVP with three portals:
+- Company Admin (Master Control)
+- PG Owner / Manager / Staff
+- Tenant Portal
 
-## Important
-
-The uploaded file was incomplete. It ends in the middle of this line:
-
-```jsx
-if (action === "Add Property" || action === "Create PG") result = await supabaseInsert("properties", mapPropertyToSupabase(f
-```
-
-Because of that, the original upload cannot compile directly as `src/App.jsx`.
-
-I kept the sanitized uploaded code here:
-
-```txt
-src/App.from-upload.incomplete.jsx
-```
-
-A temporary working `src/App.jsx` is included so the project can install and run.
-
-## Security note
-
-The uploaded file contained hard-coded Supabase and master-control login fallback values. These were removed from the GitHub-ready copy. Add real values locally in `.env`, not directly in the source code.
-
-Create `.env` from `.env.example`:
-
-```bash
-copy .env.example .env
-```
-
-Then add your real values only on your computer.
-
-## Run locally
+## Setup
 
 ```bash
 npm install
 npm run dev
 ```
 
-## Upload to GitHub
-
-Create a new empty GitHub repository named:
-
-```txt
-pgos-premium-ui
-```
-
-Then run:
+Build for production:
 
 ```bash
-git init
-git add .
-git commit -m "Initial PGOS premium UI project"
-git branch -M main
-git remote add origin https://github.com/yogeshan1999/pgos-premium-ui.git
-git push -u origin main
+npm run build
 ```
 
-## After you get the full code
+## Demo login credentials
 
-Replace `src/App.jsx` with your complete PGOS UI code. Do not paste passwords or API keys directly inside the file; use `.env`.
+- Owner/Manager/Staff: `owner@demo.com` / `owner123`
+- Tenant: `tenant@demo.com` / `tenant123`
+- Company Admin: `admin@demo.com` / `admin123`
+
+## Environment variables
+
+Copy `.env.example` to `.env` and fill with your own values:
+
+```bash
+cp .env.example .env
+```
+
+Variables:
+- `VITE_SUPABASE_URL`
+- `VITE_SUPABASE_ANON_KEY`
+- `VITE_MASTER_CONTROL_EMAIL`
+- `VITE_MASTER_CONTROL_PHONE`
+- `VITE_MASTER_CONTROL_PASSWORD`
+
+The app runs in mock-data mode when Supabase is not configured.
+
+## Implemented product scope
+
+- Clickable side navigation and dashboard cards
+- Owner pages: dashboard, properties, rooms, tenants, payments, expenses, food, complaints, notices, visitors, checkout, documents, agreements, staff, white-label site, reports, settings
+- Tenant pages: home, rent, food, issues, notices, profile
+- Company admin pages: overview, owners, active PGs, revenue, support, onboardings, plans, payments, employees, settings
+- CRUD modal flow with search, empty state, status/update handling via local state
+- Toast feedback and logout flow
+
+## Notes
+
+- Uploaded reference file is preserved at `src/App.from-upload.incomplete.jsx`.
+- Secrets are not hard-coded in source code.
